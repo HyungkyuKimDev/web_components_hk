@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>ウェブ Components</title>
+    </head>
+    <body>
+
+</script>
+        <card-card></card-card>
+        <script>
+        function change_img(img){
+            
+        }
+
+        class CardCard extends HTMLElement {
+        constructor() { super(); }
+    
+        connectedCallback() {
+        const card = document.createElement('img');
+        card.src = 'question.png';
+        card.setAttribute("id","hi");
+        card.setAttribute('onclick', 'change_img()');
+        this.appendChild(card);
+        }
+    }
+    customElements.define('card-card', CardCard);
+    </script>
+    </body>
+</html>
