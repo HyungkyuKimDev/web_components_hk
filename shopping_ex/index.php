@@ -1,67 +1,12 @@
-<?php
-// セッションを開始
-// セッションを使用するために、最初にsession_start()関数を呼び出します。
-// セッションは、複数のページ間でデータを保持するために使用されます。
-session_start();
-require "./db_config.php";
-/* ユーザーがログインしていない場合、ログインページにリダイレクト
-// $_SESSION['user']が設定されているかどうかを確認することで、ユーザーがログインしているかどうかを判断します。
-// ログインしていない場合は、header()関数を使用してlogin.phpにリダイレクトし、exit()関数でスクリプトの実行を終了します。
-if (!isset($_SESSION['user'])) {
-    header('Location: login.php');
-    exit;
-}
-
-// ログアウトリンクがクリックされた場合、セッションを破棄してログインページにリダイレクト
-// $_GET['logout']が設定されているかどうかを確認することで、ログアウトリンクがクリックされたかどうかを判断します。
-// ログアウトリンクがクリックされた場合は、unset()関数を使用して$_SESSION['user']を破棄し、ログアウト状態にします。
-// その後、header()関数を使用してlogin.phpにリダイレクトし、exit()関数でスクリプトの実行を終了します。
-if (isset($_GET['logout'])) {
-    unset($_SESSION['user']);
-    header('Location: login.php');
-    exit;
-}
-
-// ダミーの本の情報を定義(著者。価格、タイトルを日本語に変更)
-// $books配列にダミーの本の情報を定義します。
-// 各本の情報は、'id'、'title'、'author'、'price'、'image'をキーとする連想配列で表現されます。
-// 本のタイトル、著者、価格は日本語で設定されています。*/
-require 'dummy_data.php';
-// カートに追加する処理
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['book_id'], $_POST['quantity'])) {
-    $bookId = $_POST['book_id'];
-    $quantity = $_POST['quantity'];
-    
-    if (isset($_SESSION['user_id'])) {
-        $userId = $_SESSION['user_id'];
-        if (!isset($_SESSION['cart'][$userId][$bookId])) {
-            $_SESSION['cart'][$userId][$bookId] = 0;
-        }
-        $_SESSION['cart'][$userId][$bookId] += $quantity;
-        $addedMessage = "商品がカートに追加されました。";
-    } else {
-        $addedMessage = "ログインが必要です。";
-    }
-}
-?>
 <!DOCTYPE html>
 <html>
 
 <head>
     <title>Book Shopping Site</title>
-
-    <style>
-        body{
-
-        }
-        li{
-            list-style:none;
-        }
-    </style>
 </head>
 <body>
     <h1>Book Shopping Site</h1>
-    
+        <card-card></card-card>
     <?php if (isset($_SESSION['user_id'])) : ?>
         <h2>ようこそ <?php echo $_SESSION['user_id']; ?>!</h2>
         <a href="logout.php"><button type="button">ログアウト</button></a>
@@ -128,5 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['book_id'], $_POST['qu
     <!-- カートページへのリンクを表示 -->
     <!-- カートページ（cart.php）へのリンクを表示します。 -->
     <a href="cart.php"><button type="button">カートを見る</button></a>
+
+    <script type="module" src="./web.js"></script>
 </body>
 </html>

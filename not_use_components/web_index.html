@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ウェブ Components</title>
+  </head>
+  <body>
+    <!-- カードの部分 -->
+    <img
+      onclick="toggle_img(this)"
+      class="card"
+      src="../img/question.png"
+      alt=""
+    />
+    <img
+      onclick="toggle_img(this)"
+      class="card"
+      src="../img/question.png"
+      alt=""
+    />
+    <img
+      onclick="toggle_img(this)"
+      class="card"
+      src="../img/question.png"
+      alt=""
+    />
+    <img
+      onclick="toggle_img(this)"
+      class="card"
+      src="../img/question.png"
+      alt=""
+    />
+    <img
+      onclick="toggle_img(this)"
+      class="card"
+      src="../img/question.png"
+      alt=""
+    />
+    <img
+      onclick="toggle_img(this)"
+      class="card"
+      src="../img/question.png"
+      alt=""
+    />
+
+    <script>
+      // カードの変更のイベント
+      function toggle_img(img) {
+        if (img.src.includes("question.png")) {
+          img.src = "../img/start.png";
+        } else {
+          img.src = "../img/question.png";
+        }
+      }
+    </script>
+  </body>
+</html>

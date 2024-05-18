@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ウェブ Components</title>
+  </head>
+  <body>
+    <!-- 定義したComponentsの利用 -->
+    <card-card></card-card>
+    <card-card></card-card>
+    <card-card></card-card>
+    <card-card></card-card>
+    <card-card></card-card>
+    <card-card></card-card>
+
+    <!-- Componentsの定義 -->
+    <script>
+      // Componentsの情報の定義
+      class CardCard extends HTMLElement {
+        constructor() {
+          super();
+          this.toggleImage = this.toggleImage.bind(this); // methodをinstanceにbinding
+        }
+
+        // Componentsの生成し実行される関数
+        connectedCallback() {
+          const card = document.createElement("img");
+          card.src = "../img/question.png";
+          card.setAttribute("id", "hi");
+          card.addEventListener("click", this.toggleImage); // クリックのイベントリスなの追加
+          this.appendChild(card);
+        }
+
+        // イメージの変更のための関数
+        toggleImage() {
+          const card = this.querySelector("img");
+          if (card.id == "hi") {
+            card.id = "hello";
+            card.src = "../img/start.png";
+          } else {
+            card.id = "hi";
+            card.src = "../img/question.png";
+          }
+        }
+      }
+      // Componentsの定義
+      customElements.define("card-card", CardCard);
+    </script>
+  </body>
+</html>
