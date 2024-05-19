@@ -6,13 +6,19 @@
     <title>ウェブ Components</title>
   </head>
   <body>
+
+
     <!-- 定義したComponentsの利用 -->
     <card-card></card-card>
-    <card-card></card-card>
-    <card-card></card-card>
-    <card-card></card-card>
-    <card-card></card-card>
-    <card-card></card-card>
+
+
+
+
+
+
+
+
+
 
     <!-- Componentsの定義 -->
     <script>
@@ -20,32 +26,37 @@
       class CardCard extends HTMLElement {
         constructor() {
           super();
-          this.toggleImage = this.toggleImage.bind(this); // methodをinstanceにbinding
+          this.toggleImage = this.toggleImage.bind(this);
+          // methodをinstanceにbinding（methodが他のinstanceを使わずにこのinstanceを使うようにする）
         }
-
         // Componentsの生成し実行される関数
         connectedCallback() {
-          const card = document.createElement("img");
-          card.src = "../img/question.png";
-          card.setAttribute("id", "hi");
-          card.addEventListener("click", this.toggleImage); // クリックのイベントリスなの追加
-          this.appendChild(card);
+          // 六つのカードの追加
+          for (let i = 0; i < 6; i++) {
+            const card = document.createElement("img");
+            card.src = "../img/question.png";
+            card.setAttribute("value", "hi");
+            card.addEventListener("click", this.toggleImage); // クリックのイベントリスなの追加
+            this.appendChild(card);
+          }
         }
-
         // イメージの変更のための関数
-        toggleImage() {
-          const card = this.querySelector("img");
-          if (card.id == "hi") {
-            card.id = "hello";
+        toggleImage(event) {
+          // クリックされたカードを選択
+          const card = event.target;
+          if (card.getAttribute("value") === "hi") {
+            card.setAttribute("value", "hello");
             card.src = "../img/start.png";
           } else {
-            card.id = "hi";
+            card.setAttribute("value", "hi");
             card.src = "../img/question.png";
           }
         }
       }
       // Componentsの定義
       customElements.define("card-card", CardCard);
+
+
     </script>
   </body>
 </html>
